@@ -8,3 +8,16 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install -g bats
       - run: bats -v
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - run: docker build --tag bitcoind .
+    - name: Push to ECR
+      id: ecr
+      uses: jwalton/gh-ecr-push@v1
+      with:
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: ap-northeast-1#
+        local-image: bitcoind
+        image: 083397868157.dkr.ecr.ap-northeast-1.amazonaws.com/bitcoind:${{ github.sha }}
