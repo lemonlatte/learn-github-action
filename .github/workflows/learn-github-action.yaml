@@ -1,5 +1,9 @@
 name: learn-github-actions
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
@@ -11,7 +15,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-    - run: docker build --tag bitcoind .
+    - uses: actions/checkout@v2
+    - run: docker build --tag bitcoind -f Dockerfile .
     - name: Push to ECR
       id: ecr
       uses: jwalton/gh-ecr-push@v1
