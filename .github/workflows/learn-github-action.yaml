@@ -23,6 +23,6 @@ jobs:
       with:
         access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: ap-northeast-1#
+        region: ap-northeast-1
         local-image: bitcoind
         image: 083397868157.dkr.ecr.ap-northeast-1.amazonaws.com/bitcoind:${{ github.sha }}
